@@ -8,7 +8,6 @@ def readFile(filename):
 
 lines = readFile("d04input.txt")
 
-count = 0
 card_wins = []
 card_nums = []
 for line in lines:
