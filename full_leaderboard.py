@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import time
 import random
 
-year = 2022
+year = 2023
 points = dict()
 for day in range(1, 26):
     url = "https://adventofcode.com/{}/leaderboard/day/{}".format(year, day)
@@ -13,7 +13,7 @@ for day in range(1, 26):
         break
 
     print("Parsing day {}...".format(day))
-    soup = BeautifulSoup(BeautifulSoup(r.content, 'html5lib').prettify(), 'html5lib')
+    soup = BeautifulSoup(BeautifulSoup(r.content, 'html.parser').prettify(), 'html.parser')
 
     entries = soup.findAll("div", {"class": "leaderboard-entry"})
     for entry in entries:

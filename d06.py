@@ -33,7 +33,6 @@ def get_result_2(times, distances):
     return total
 
 
-
 lines = readFile("d06input.txt")
 times = [int(x) for x in lines[0].split(":")[1].strip().split()]
 distances = [int(x) for x in lines[1].split(":")[1].strip().split()]
