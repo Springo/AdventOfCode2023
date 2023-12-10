@@ -77,7 +77,7 @@ def bfs(adj_list, key, target):
     while len(q) > 0:
         item, dist = q.pop(0)
         for cur in adj_list[item]:
-            _, id = cur
+            id = cur
             if id == target:
                 return dist + 1
 
