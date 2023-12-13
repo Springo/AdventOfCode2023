@@ -112,3 +112,12 @@ def expand_grid(grid, n, c):
     expanded_lines.extend([[c] * (width + 2 * n) for _ in range(n)])
 
     return expanded_lines
+
+
+def transpose(grid):
+    new_grid = [[0] * len(grid) for _ in range(len(grid[0]))]
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            new_grid[j][i] = grid[i][j]
+
+    return new_grid
