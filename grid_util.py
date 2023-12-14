@@ -15,6 +15,14 @@ def convert_to_grid(lines, convert_numeric=True):
     return grid
 
 
+def print_grid(grid):
+    for line in grid:
+        for c in line:
+            print(c, end=" ")
+        print()
+    print()
+
+
 def serialize(grid):
     ser = ""
     for row in grid:
@@ -120,4 +128,27 @@ def transpose(grid):
         for j in range(len(grid[i])):
             new_grid[j][i] = grid[i][j]
 
+    return new_grid
+
+
+def rotate(grid, dir=1):
+    dir = dir % 4
+    new_grid = None
+    if dir == 0:
+        new_grid = grid
+    elif dir == 1:
+        new_grid = [[0] * len(grid) for _ in range(len(grid[0]))]
+        for i in range(len(new_grid)):
+            for j in range(len(new_grid[i])):
+                new_grid[i][j] = grid[len(grid) - j - 1][i]
+    elif dir == 2:
+        new_grid = [[0] * len(grid[0]) for _ in range(len(grid))]
+        for i in range(len(new_grid)):
+            for j in range(len(new_grid[i])):
+                new_grid[i][j] = grid[len(grid) - i - 1][len(grid[0]) - j - 1]
+    elif dir == 3:
+        new_grid = [[0] * len(grid) for _ in range(len(grid[0]))]
+        for i in range(len(new_grid)):
+            for j in range(len(new_grid[i])):
+                new_grid[i][j] = grid[j][len(grid[0]) - i - 1]
     return new_grid
