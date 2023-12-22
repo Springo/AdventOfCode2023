@@ -31,31 +31,47 @@ def serialize(grid):
     return ser
 
 
-def grid_project(grid, i, j, dir, step=1):
+def grid_project(grid, i, j, dir, step=1, wrap=False):
     if dir == 0:
         if j < len(grid[i]) - step:
             return i, j + step
+        elif wrap:
+            return i, (j + step) % len(grid[i])
     elif dir == 1:
         if i < len(grid) - step and j < len(grid[i]) - step:
             return i + step, j + step
+        elif wrap:
+            return (i + step) % len(grid), (j + step) % len(grid[i])
     elif dir == 2:
         if i < len(grid) - step:
             return i + step, j
+        elif wrap:
+            return (i + step) % len(grid), j
     elif dir == 3:
         if i < len(grid) - step and j >= step:
             return i + step, j - step
+        elif wrap:
+            return (i + step) % len(grid), (j - step) % len(grid[i])
     elif dir == 4:
         if j >= step:
             return i, j - step
+        elif wrap:
+            return i, (j - step) % len(grid[i])
     elif dir == 5:
         if i >= step and j >= step:
             return i - step, j - step
+        elif wrap:
+            return (i - step) % len(grid), (j - step) % len(grid[i])
     elif dir == 6:
         if i >= step:
             return i - step, j
+        elif wrap:
+            return (i - step) % len(grid), j
     elif dir == 7:
         if i >= step and j < len(grid[i]) - step:
             return i - step, j + step
+        elif wrap:
+            return (i - step) % len(grid), (j + step) % len(grid[i])
     return None, None
 
 
@@ -79,7 +95,7 @@ def get_region(grid, i1, j1, i2, j2, default=None):
     return region
 
 
-def get_neighbors(grid, i, j, indices=False, orth=False, custom_dirs=None, default=None):
+def get_neighbors(grid, i, j, indices=False, orth=False, wrap=False, custom_dirs=None, default=None):
     neigh = []
     if custom_dirs is not None:
         dirs = custom_dirs
@@ -89,7 +105,7 @@ def get_neighbors(grid, i, j, indices=False, orth=False, custom_dirs=None, defau
         else:
             dirs = range(8)
     for dir in dirs:
-        i2, j2 = grid_project(grid, i, j, dir)
+        i2, j2 = grid_project(grid, i, j, dir, wrap=wrap)
         if i2 is not None:
             if indices:
                 neigh.append((i2, j2))
